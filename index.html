@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Annie's Beauty Store - Premium Cosmetics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #e91e63;
+            letter-spacing: -1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #e91e63;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #e91e63;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-box {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            border-color: #e91e63;
+            box-shadow: 0 0 10px rgba(233, 30, 99, 0.2);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            color: #e91e63;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e91e63;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="200" cy="200" r="150" fill="%23ffffff20"/><circle cx="800" cy="300" r="100" fill="%23ffffff15"/><circle cx="600" cy="700" r="200" fill="%23ffffff10"/></svg>');
+            background-size: cover;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            animation: fadeInLeft 1s ease-out;
+        }
+
+        .hero-badge {
+            color: #e91e63;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #2d3748;
+        }
+
+        .hero-cta {
+            background: #e91e63;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(233, 30, 99, 0.3);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 30, 99, 0.4);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s ease-out;
+        }
+
+        .hero-product {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            display: block;
+            animation: productFloat 4s ease-in-out infinite;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(233, 30, 99, 0.3);
+            background: #f5f5f5;
+        }
+
+        @keyframes productFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        /* Image Placeholder Styles */
+        .product-image-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #999;
+            border-radius: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image-placeholder::before {
+            content: 'Image Placeholder';
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .product-image-placeholder.loaded {
+            display: none;
+        }
+
+        .product-image-real {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-image-real.loaded {
+            opacity: 1;
+        }
+
+        /* Product Showcase */
+        .product-hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .product-info {
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .product-badge {
+            color: #e91e63;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .product-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #2d3748;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .product-features li {
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #e91e63;
+            font-weight: bold;
+        }
+
+        .product-visual {
+            position: relative;
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .product-image-main {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            background: #f5f5f5;
+            border-radius: 20px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image-main:hover {
+            transform: translateY(-10px);
+        }
+
+        /* Beauty Essentials */
+        .beauty-essentials {
+            padding: 100px 0;
+            background: #fff;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .section-badge {
+            color: #e91e63;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 250px;
+            position: relative;
+            overflow: hidden;
+            background: #f5f5f5;
+        }
+
+        .product-details {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .product-price {
+            color: #e91e63;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .affiliate-btn {
+            background: #e91e63;
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .affiliate-btn:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+
+        /* Special Offers Section */
+        .special-offers {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%);
+        }
+
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.15);
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff4444;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .offer-image {
+            height: 200px;
+            background: #f5f5f5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .offer-details {
+            padding: 1.5rem;
+        }
+
+        .offer-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .offer-original-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 1rem;
+        }
+
+        .offer-sale-price {
+            color: #e91e63;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-left: 10px;
+        }
+
+        .offer-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            line-height: 1.5;
+        }
+
+        /* Featured Products */
+        .featured-section {
+            padding: 100px 0;
+            background: #f8f9fa;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .featured-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .featured-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #4caf50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+
+        .featured-image {
+            height: 220px;
+            background: #f5f5f5;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-details {
+            padding: 1.5rem;
+        }
+
+        .featured-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d3748;
+        }
+
+        .featured-price {
+            color: #e91e63;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .featured-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stars {
+            color: #ffd700;
+        }
+
+        .rating-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .newsletter-btn {
+            background: #e91e63;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .newsletter-btn:hover {
+            background: #c2185b;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #e91e63;
+        }
+
+        .footer-section a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: #c2185b;
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-content,
+            .product-showcase {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .hero h1,
+            .product-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .products-grid,
+            .offers-grid,
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-input,
+            .newsletter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">ANNIE'S STORE</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#offers">Special Offers</a></li>
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <input type="text" class="search-box" placeholder="Search products...">
+                <div class="cart-icon">
+                    🛒
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="hero-badge">Presenting Perfect Cosmetics</div>
+                    <h1 id="hero-title">Beauty that is you</h1>
+                    <a href="#products" class="hero-cta">Shop Now</a>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-product">
+                        <div class="product-image-placeholder">📸</div>
+                        <img src="" alt="Hero Product" class="product-image-real" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="product-hero">
+        <div class="container">
+            <div class="product-showcase">
+                <div class="product-info">
+                    <div class="product-badge">Featured Product</div>
+                    <h2 class="product-title" id="featured-product-title">Premium Beauty Cream</h2>
+                    <ul class="product-features" id="featured-product-features">
+                        <li>Long lasting formula (24 hours guarantee)</li>
+                        <li>Matte finish with smooth natural look</li>
+                        <li>100% organic ingredients</li>
+                        <li>Dermatologist tested and approved</li>
+                    </ul>
+                    <a href="https://youtube.com" target="_blank" class="hero-cta affiliate-btn">Buy Now - Special Price!</a>
+                </div>
+                <div class="product-visual">
+                    <div class="product-image-main">
+                        <div class="product-image-placeholder">📸</div>
+                        <img src="" alt="Featured Product" class="product-image-real" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="beauty-essentials">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Nature's Touch</div>
+                <h2 class="section-title">Beauty Essentials</h2>
+            </div>
+            
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <section id="offers" class="special-offers">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Limited Time</div>
+                <h2 class="section-title">Special Offers</h2>
+            </div>
+            
+            <div class="offers-grid" id="offers-grid">
+                <!-- Special offers will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <section id="featured" class="featured-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Best Sellers</div>
+                <h2 class="section-title">Featured Products</h2>
+            </div>
+            
+            <div class="featured-grid" id="featured-grid">
+                <!-- Featured products will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated!</h2>
+            <p>Subscribe to our newsletter for exclusive deals and beauty tips</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+                <button type="submit" class="newsletter-btn">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: hello@anniesstore.com</p>
+                    <p>Phone: 1-800-BEAUTY</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <p><a href="#">Privacy Policy</a></p>
+                    <p><a href="#">Terms of Service</a></p>
+                    <p><a href="#">FAQ</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <p><a href="#">Instagram</a></p>
+                    <p><a href="#">Facebook</a></p>
+                    <p><a href="#">YouTube</a></p>
+                </div>
+            </div>
+            <p>&copy; 2025 Annie's Store. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button class="scroll-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // ===== CONFIGURATION SECTION =====
+        // Update these variables to customize your site
+        const SITE_CONFIG = {
+            heroTitle: "Beauty that is you",
+            featuredProduct: {
+                title: "Premium Beauty Cream",
+                features: [
+                    "Long lasting formula (24 hours guarantee)",
+                    "Matte finish with smooth natural look", 
+                    "100% organic ingredients",
+                    "Dermatologist tested and approved"
+                ]
+            }
+        };
+
+        // ===== PRODUCTS DATA =====
+        // Add your products here - just update the data and they'll appear automatically
+        const PRODUCTS = [
+            {
+                id: 1,
+                name: "Fairness Cream",
+                price: "$18.00",
+                description: "Advanced whitening formula with natural ingredients for radiant skin.",
+                image: "", // Add image URL here
+                affiliateLink: "https://youtube.com",
+                category: "skincare"
+            },
+            {
+                id: 2,
+                name: "Anti-Aging Serum",
+                price: "$25.00",
+                description: "Powerful anti-aging serum with peptides and vitamin C for youthful skin.",
+                image: "", // Add image URL here
+                affiliateLink: "https://youtube.com",
+                category: "skincare"
+            },
+            {
+                id: 3,
+                name: "Moisturizing Lotion",
+                price: "$22.00",
+                description: "Deep moisturizing lotion for dry and sensitive skin types.",
+                image: "", // Add image URL here
+                affiliateLink: "https://youtube.com",
+                category: "skincare"
+            },
+            {
+                id: 4,
+                name: "Vitamin C Cream",
+                price: "$28.00",
+                description: "Brightening cream with vitamin C for glowing, healthy skin.",
+                image: "", // Add image URL here
+                affiliateLink: "https://youtube.com",
+                category: "skincare"
+            },
+            {
+                id: 5,
+                name: "Herbal Face Mask",
+                price: "$15.00",
+                description: "Natural clay mask with herbs for deep cleansing and purification.",
+                image: "", // Add image URL here
+                affiliateLink: "https://youtube.com",
+                category: "skincare"
+            },
+            {
+                id: 6,
+                name: "Lip Balm Set",
+                price: "$12.00",
+                description: "Set of 3 nourishing lip balms with different flavors.",
+                image: "", // Add image URL here
+                affiliateLink: "https://
